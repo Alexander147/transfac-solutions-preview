@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRANSFAC Solutions — We'll Do It For You | geneXplain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16201C;
+    --ink-soft:#2C3A33;
+    --paper:#F2EFE6;
+    --paper-warm:#EBE6D7;
+    --teal:#1F5C4D;
+    --teal-bright:#2C7C68;
+    --accent:#C8642F;
+    --accent-soft:#D98A56;
+    --line:rgba(22,32,28,0.14);
+    --line-soft:rgba(22,32,28,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:var(--paper)}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+  .narrow{max-width:760px;margin:0 auto;padding:0 32px}
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--teal);
+  }
+  .eyebrow.accent{color:var(--accent)}
+
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.08;letter-spacing:-0.01em}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,239,230,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{font-family:'Fraunces',serif;font-size:20px;font-weight:600;letter-spacing:-0.01em}
+  .brand span{color:var(--accent)}
+  .nav-cta{
+    font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+    color:var(--paper);background:var(--ink);
+    padding:10px 20px;border-radius:2px;text-decoration:none;
+    transition:background .2s ease;
+  }
+  .nav-cta:hover{background:var(--teal)}
+  .nav-link{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 96px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:64px;align-items:start}
+  .hero h1{
+    font-size:clamp(42px,6vw,76px);
+    margin:24px 0 0;
+    max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--teal)}
+  .hero-sub{
+    margin-top:32px;font-size:21px;line-height:1.5;color:var(--ink-soft);
+    max-width:42ch;
+  }
+  .hero-cta-row{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .btn-primary{
+    font-family:'Inter',sans-serif;font-size:16px;font-weight:500;
+    background:var(--accent);color:var(--paper);
+    padding:16px 30px;border-radius:2px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .btn-primary:hover{background:#b5571f;transform:translateY(-1px)}
+  .btn-primary .arr{transition:transform .2s ease}
+  .btn-primary:hover .arr{transform:translateX(4px)}
+  .btn-text{font-size:15px;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .btn-text:hover{color:var(--ink);border-color:var(--ink)}
+
+  /* the exchange panel — the signature */
+  .exchange{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,0.4);
+    border-radius:4px;
+    padding:28px;
+    position:relative;
+  }
+  .exchange-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+  .ex-node{position:relative;padding-left:30px;padding-bottom:22px}
+  .ex-node:last-child{padding-bottom:0}
+  .ex-node::before{
+    content:"";position:absolute;left:5px;top:6px;width:9px;height:9px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--teal);z-index:2;
+  }
+  .ex-node.is-answer::before{background:var(--accent);border-color:var(--accent)}
+  .ex-node:not(:last-child)::after{
+    content:"";position:absolute;left:9px;top:14px;bottom:-2px;width:2px;
+    background:linear-gradient(var(--teal),var(--accent));opacity:.5;
+  }
+  .ex-kind{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);opacity:.7}
+  .ex-text{font-family:'Fraunces',serif;font-size:18px;line-height:1.35;margin-top:3px}
+  .ex-node.is-answer .ex-text{color:var(--teal)}
+  .ex-sign{font-size:13px;color:var(--ink-soft);margin-top:8px;font-family:'Inter',sans-serif}
+  .ex-sign strong{color:var(--accent);font-weight:600}
+
+  /* ---------- STAT STRIP ---------- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-warm)}
+  .strip-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:34px 28px;border-right:1px solid var(--line-soft)}
+  .stat:last-child{border-right:none}
+  .stat-num{font-family:'Fraunces',serif;font-size:38px;font-weight:600;line-height:1;color:var(--teal)}
+  .stat-num span{font-size:22px;color:var(--accent)}
+  .stat-label{font-size:13px;color:var(--ink-soft);margin-top:10px;line-height:1.4}
+
+  /* ---------- SECTION BASE ---------- */
+  section.block{padding:96px 0}
+  .section-head{margin-bottom:56px}
+  .section-head h2{font-size:clamp(32px,4vw,46px);margin-top:16px;max-width:20ch}
+  .lede{font-size:20px;color:var(--ink-soft);max-width:60ch;margin-top:20px;line-height:1.55}
+
+  /* problem section */
+  .problem{background:var(--ink);color:var(--paper)}
+  .problem .eyebrow{color:var(--accent-soft)}
+  .problem h2{color:var(--paper)}
+  .problem .lede{color:rgba(242,239,230,0.72)}
+  .pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(242,239,230,0.12);border:1px solid rgba(242,239,230,0.12);margin-top:8px}
+  .pain{background:var(--ink);padding:32px 30px}
+  .pain-q{font-family:'Fraunces',serif;font-size:21px;line-height:1.3;color:var(--paper)}
+  .pain-d{font-size:15px;color:rgba(242,239,230,0.62);margin-top:14px;line-height:1.55}
+
+  /* the difference / depth section */
+  .depth-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .layer{border-left:2px solid var(--line);padding:6px 0 6px 26px;margin-bottom:28px;position:relative}
+  .layer::before{content:"";position:absolute;left:-2px;top:8px;width:2px;height:26px;background:var(--accent)}
+  .layer-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;color:var(--teal)}
+  .layer-name sup{font-size:9px}
+  .layer-desc{font-size:16px;color:var(--ink-soft);margin-top:6px;line-height:1.5}
+  .depth-aside{background:var(--paper-warm);border:1px solid var(--line);border-radius:4px;padding:36px}
+  .depth-aside h3{font-size:24px;margin-bottom:18px}
+  .depth-aside p{font-size:16px;color:var(--ink-soft);line-height:1.6}
+  .depth-aside p + p{margin-top:14px}
+
+  /* accountability — the human thread */
+  .account{background:var(--teal);color:var(--paper)}
+  .account .eyebrow{color:var(--accent-soft)}
+  .account h2{color:var(--paper);font-size:clamp(30px,4vw,44px);max-width:18ch}
+  .account-body{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start;margin-top:8px}
+  .account p.big{font-family:'Fraunces',serif;font-size:26px;line-height:1.4;font-weight:400}
+  .account p.big em{color:var(--accent-soft);font-style:italic}
+  .account-detail{font-size:16px;color:rgba(242,239,230,0.78);line-height:1.6}
+  .account-detail p + p{margin-top:16px}
+  .quote-card{border-left:2px solid var(--accent);padding:4px 0 4px 24px;margin-top:12px}
+  .quote-card .ql{font-family:'Fraunces',serif;font-style:italic;font-size:19px;line-height:1.45;color:var(--paper)}
+  .quote-card .qa{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--accent-soft);margin-top:14px;text-transform:uppercase}
+
+  /* vs CRO */
+  .contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .col-head{padding:22px 28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase}
+  .col-a .col-head{background:var(--paper-warm);color:var(--ink-soft);border-bottom:1px solid var(--line)}
+  .col-b .col-head{background:var(--ink);color:var(--accent-soft);border-bottom:1px solid var(--ink)}
+  .col-b{background:rgba(255,255,255,0.35)}
+  .row{padding:20px 28px;font-size:16px;line-height:1.5;border-bottom:1px solid var(--line-soft)}
+  .col-a .row{color:var(--ink-soft)}
+  .col-b .row{color:var(--ink);font-weight:500}
+  .row:last-child{border-bottom:none}
+  .contrast-grid{position:relative}
+  .bridge{font-size:16px;color:var(--ink-soft);line-height:1.55;max-width:70ch;margin-top:28px}
+
+  /* who it's for */
+  .for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .for-card{border-top:2px solid var(--ink);padding-top:22px}
+  .for-card h3{font-size:20px;margin-bottom:10px}
+  .for-card p{font-size:15px;color:var(--ink-soft);line-height:1.55}
+  .for-card .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-top:14px;display:block}
+
+  /* ---------- SERVICE LINES (capabilities depth) ---------- */
+  .services{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:8px}
+  .service{background:var(--paper);padding:38px 34px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start}
+  .service-num{font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--accent);line-height:1}
+  .service h3{font-size:22px;line-height:1.24;margin-bottom:14px;max-width:40ch}
+  .service h3 sup{font-size:11px}
+  .service-role{font-size:15px;color:var(--ink-soft);line-height:1.55;margin-bottom:22px}
+  .service-role strong{color:var(--teal);font-weight:600}
+  .deliv-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+  .deliv{display:flex;flex-wrap:wrap;gap:8px}
+  .deliv span{font-size:13px;background:var(--paper-warm);border:1px solid var(--line-soft);border-radius:2px;padding:6px 12px;color:var(--ink-soft);line-height:1.3}
+  .service-ext{font-size:14px;color:var(--ink-soft);margin-top:20px;line-height:1.5}
+  .service-ext em{color:var(--teal);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:6px}
+
+  /* ---------- ENGAGEMENT LEVELS ---------- */
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+  .level-card{border:1px solid var(--line);border-radius:4px;padding:32px 28px;background:rgba(255,255,255,0.45);display:flex;flex-direction:column}
+  .level-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .level-card h3{font-size:22px;line-height:1.2;margin-bottom:16px}
+  .level-card p{font-size:15px;color:var(--ink-soft);line-height:1.58}
+  .level-card p + p{margin-top:14px}
+  .level-suit{margin-top:auto;padding-top:20px;font-size:14px;color:var(--ink);border-top:1px solid var(--line-soft);line-height:1.5}
+  .level-suit strong{color:var(--teal);font-weight:600}
+
+  /* ---------- PARTNER / CRO MODEL ---------- */
+  .model-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+  .model-panel{background:var(--paper-warm);border:1px solid var(--line);border-radius:4px;padding:34px}
+  .model-panel .mp-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  .model-panel.partner .mp-label{color:var(--accent)}
+  .model-panel h3{font-size:21px;margin-bottom:18px}
+  .model-panel ul{list-style:none;margin:0;padding:0}
+  .model-panel li{font-size:15px;color:var(--ink-soft);line-height:1.5;padding-left:20px;position:relative;margin-bottom:11px}
+  .model-panel li:last-child{margin-bottom:0}
+  .model-panel li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+  .model-join{font-family:'Fraunces',serif;font-size:23px;line-height:1.4;color:var(--teal);max-width:64ch;margin:40px auto 0;text-align:center}
+  .model-join em{color:var(--accent);font-style:italic}
+
+  /* CTA */
+  .cta-final{background:var(--ink);color:var(--paper);text-align:center;padding:110px 0}
+  .cta-final h2{color:var(--paper);font-size:clamp(34px,5vw,58px);max-width:18ch;margin:0 auto}
+  .cta-final h2 em{font-style:italic;color:var(--accent-soft)}
+  .cta-final p{color:rgba(242,239,230,0.72);font-size:19px;max-width:50ch;margin:26px auto 40px}
+  .cta-final .btn-primary{font-size:17px;padding:18px 36px}
+  .cta-note{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:rgba(242,239,230,0.5);margin-top:28px;text-transform:uppercase}
+
+  /* footer */
+  footer{background:var(--ink);color:rgba(242,239,230,0.55);border-top:1px solid rgba(242,239,230,0.1);padding:40px 0}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px}
+  .foot-inner .brand{color:var(--paper);font-size:18px}
+  .foot-inner a{color:rgba(242,239,230,0.55);text-decoration:none}
+  .foot-inner a:hover{color:var(--accent-soft)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .depth-grid{grid-template-columns:1fr;gap:32px}
+    .account-body{grid-template-columns:1fr;gap:32px}
+    .strip-grid{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line-soft)}
+    .pain-grid{grid-template-columns:1fr}
+    .for-grid{grid-template-columns:1fr}
+    .contrast-grid{grid-template-columns:1fr}
+    .col-a .col-head{border-bottom:none}
+    .service{grid-template-columns:1fr;gap:16px}
+    .levels{grid-template-columns:1fr}
+    .model-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    body{font-size:17px}
+    .wrap,.narrow{padding:0 22px}
+    .hero{padding:56px 0 64px}
+    section.block{padding:68px 0}
+    .strip-grid{grid-template-columns:1fr}
+    .stat{border-right:none;border-bottom:1px solid var(--line-soft)}
+    .stat:last-child{border-bottom:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="brand">gene<span>X</span>plain</div>
+    <a href="#talk" class="nav-cta">Book a discovery call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">TRANSFAC Solutions — We'll do it for you</span>
+      <h1>Hand us the question. Get back an <em>answer</em> you can defend.</h1>
+      <p class="hero-sub">Not a tool to learn. Not raw data to wrangle. geneXplain is the mechanistic intelligence layer of your project — a defensible answer to your specific target or disease question, built on knowledge no general CRO holds, with a named expert behind the result.</p>
+      <div class="hero-cta-row">
+        <a href="#talk" class="btn-primary">Book a discovery call <span class="arr">→</span></a>
+        <a href="#capabilities" class="btn-text">See what we deliver →</a>
+      </div>
+    </div>
+
+    <div class="exchange reveal">
+      <div class="exchange-label">How an engagement runs</div>
+      <div class="ex-node">
+        <div class="ex-kind">You bring</div>
+        <div class="ex-text">"Here's our target. Here's the disease. We don't know what's driving it."</div>
+      </div>
+      <div class="ex-node">
+        <div class="ex-kind">We scope it</div>
+        <div class="ex-text">A conversation, then a defined engagement — agreed case by case.</div>
+      </div>
+      <div class="ex-node is-answer">
+        <div class="ex-kind">You get back</div>
+        <div class="ex-text">A mechanistic answer, traceable to the evidence behind it.</div>
+        <div class="ex-sign">— with <strong>an accountable expert</strong> who stands behind the result.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STAT STRIP -->
+<div class="strip">
+  <div class="wrap strip-grid">
+    <div class="stat reveal">
+      <div class="stat-num">38<span>+</span></div>
+      <div class="stat-label">years of continuous manual curation behind every answer</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">1,000<span>+</span></div>
+      <div class="stat-label">person-years of curated molecular biology</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">3</div>
+      <div class="stat-label">curated layers — regulation, signaling, disease — in one framework</div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">1</div>
+      <div class="stat-label">named human accountable for what you receive</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="block problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The reason teams come to us</span>
+      <h2>Sometimes you don't want the platform. You want the answer.</h2>
+      <p class="lede">You have the question and the data. What you don't have is the time, the specialized knowledge, or a person who can put their name on the conclusion. And the most expensive mistake in R&amp;D isn't generating the data — it's committing budget to the wrong hypothesis.</p>
+    </div>
+    <div class="pain-grid reveal">
+      <div class="pain">
+        <div class="pain-q">"We have a result — now what's the next experiment?"</div>
+        <div class="pain-d">A list of differentially expressed genes is not a plan. Solutions delivers the mechanistic hypothesis and the path forward, not another table to interpret.</div>
+      </div>
+      <div class="pain">
+        <div class="pain-q">"Too many candidates, no way to rank them."</div>
+        <div class="pain-d">We turn a long list into a short, ordered one — built on causal regulatory biology, not statistical association — so validation goes to the candidates worth the spend.</div>
+      </div>
+      <div class="pain">
+        <div class="pain-q">"Our pipeline is five disconnected tools."</div>
+        <div class="pain-d">Gene to regulation to pathway to disease to drug target — handled as one engagement, by the people who built the underlying knowledge.</div>
+      </div>
+      <div class="pain">
+        <div class="pain-q">"When the analysis is wrong, who answers for it?"</div>
+        <div class="pain-d">An AI model can't take professional responsibility for a conclusion. A named expert can — and that accountability is part of the service model.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DIFFERENCE / DEPTH -->
+<section class="block" id="difference">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow accent">What's actually behind the work</span>
+      <h2>Every bioinformatics shop runs analyses. Almost none run them on this.</h2>
+      <p class="lede">The differentiator isn't "we do analysis." Everyone does. It's the curated, mechanistic knowledge the analysis stands on — manually built and maintained for nearly four decades.</p>
+    </div>
+    <div class="depth-grid reveal">
+      <div>
+        <div class="layer">
+          <div class="layer-name">TRANSFAC<sup>®</sup></div>
+          <div class="layer-desc">Transcription factors and experimentally verified binding sites — the most comprehensive library of DNA motifs in existence.</div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">TRANSPATH<sup>®</sup></div>
+          <div class="layer-desc">Causal, directional signal transduction reactions — not correlation networks. Curated reactions with direction, cellular context, and a primary-literature source.</div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">HumanPSD<sup>™</sup></div>
+          <div class="layer-desc">Diseases, clinical trials, biomarkers, and drug targets with mechanistic annotations — connecting molecular biology to clinical context.</div>
+        </div>
+      </div>
+      <div class="depth-aside">
+        <h3>Mechanism, not correlation.</h3>
+        <p>A general CRO runs the same omics pipelines everyone else does and hands you what changed. The harder question — <em>why</em> it changed, and what to do next — is where most engagements stop and ours begins.</p>
+        <p>We don't replace your experimental validation — we make it smarter. Pinning down the causal mechanism first narrows a large, uncertain search space to the few candidates worth your bench time and budget.</p>
+        <p>Because the answer traces through regulation → pathway → disease, every conclusion is anchored to a record you can audit, not a black box you have to trust.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE LINES (the full capabilities) -->
+<section class="block" id="capabilities" style="background:var(--paper-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow accent">Six service lines</span>
+      <h2>Where mechanistic intelligence changes the decision.</h2>
+      <p class="lede">Each engagement is expert-delivered and scoped case by case. Every line can stand alone as a computational package or be extended with experimental validation through our partners.</p>
+    </div>
+
+    <div class="services reveal">
+
+      <div class="service">
+        <div class="service-num">01</div>
+        <div>
+          <h3>Disease Mechanism Reconstruction, Master-Regulator Discovery &amp; Drug-Target Prioritisation</h3>
+          <p class="service-role"><strong>Role in your project:</strong> supports early translational research, target discovery, disease-mechanism clarification, and consortium project design. Helps you focus on mechanistically justified targets and avoid weak or purely statistical hypotheses.</p>
+          <div class="deliv-label">Main deliverables</div>
+          <div class="deliv">
+            <span>Disease-control network</span>
+            <span>Transcription-factor analysis</span>
+            <span>Upstream pathway reconstruction</span>
+            <span>Master-regulator ranking</span>
+            <span>Druggable target shortlist</span>
+            <span>Mechanism report</span>
+          </div>
+          <p class="service-ext"><em>Extend with a partner</em>Omics data generation, single-cell analysis, proteomics, qPCR, perturbation assays, and functional validation.</p>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">02</div>
+        <div>
+          <h3>Treatment Response, Resistance Mechanisms &amp; Rational Combination-Therapy Intelligence</h3>
+          <p class="service-role"><strong>Role in your project:</strong> supports drug rescue, oncology resistance studies, responder / non-responder analysis, and combination-therapy design. Helps reduce blind combination testing and prioritise biologically justified therapeutic strategies.</p>
+          <div class="deliv-label">Main deliverables</div>
+          <div class="deliv">
+            <span>Resistance-driver map</span>
+            <span>Pathway-rewiring analysis</span>
+            <span>Master regulators of non-response</span>
+            <span>Rational combination hypotheses</span>
+            <span>Resistance biomarker shortlist</span>
+          </div>
+          <p class="service-ext"><em>Extend with a partner</em>Organoid drug testing, drug screens, perturbation assays, phosphoproteomics, xenograft models, or ex vivo validation.</p>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">03</div>
+        <div>
+          <h3>Intelligent Promoter Design &amp; Synthetic Regulatory-Element Engineering</h3>
+          <p class="service-role"><strong>Role in your project:</strong> supports gene-therapy vector design, synthetic biology, engineered expression systems, and inducible construct development. Helps reduce failed promoter libraries, non-specific expression, and poorly controlled construct designs.</p>
+          <div class="deliv-label">Main deliverables</div>
+          <div class="deliv">
+            <span>Promoter grammar analysis</span>
+            <span>Tissue- or cell-specific regulatory logic</span>
+            <span>Candidate promoter / enhancer designs</span>
+            <span>Specificity assessment</span>
+            <span>Ranked constructs</span>
+            <span>Validation plan</span>
+          </div>
+          <p class="service-ext"><em>Extend with a partner</em>DNA synthesis, reporter assays, vector testing, cell-type specificity testing, and off-target expression profiling.</p>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">04</div>
+        <div>
+          <h3>CRISPR, CAR-T &amp; Cell / Gene-Therapy Design Intelligence</h3>
+          <p class="service-role"><strong>Role in your project:</strong> supports advanced-therapy design, CAR-T / CAR-NK target selection, CRISPR perturbation strategy, and regulatory-cassette design. Helps improve target selection, cassette logic, safety interpretation, and preclinical prioritisation.</p>
+          <div class="deliv-label">Main deliverables</div>
+          <div class="deliv">
+            <span>Target-selection report</span>
+            <span>Pathway &amp; tissue-risk analysis</span>
+            <span>Promoter / cassette logic</span>
+            <span>CRISPR intervention strategy</span>
+            <span>Safety &amp; biomarker roadmap</span>
+          </div>
+          <p class="service-ext"><em>Extend with a partner</em>CRISPR screens, CAR construct testing, immune-cell functional assays, cytotoxicity testing, and safety profiling.</p>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">05</div>
+        <div>
+          <h3>Multi-Omics Biomarker Panel &amp; Companion-Diagnostic Design</h3>
+          <p class="service-role"><strong>Role in your project:</strong> supports diagnostic development, patient stratification, companion-diagnostic strategy, and clinical biomarker selection. Helps you avoid weak biomarker panels and focus validation on markers with mechanistic relevance.</p>
+          <div class="deliv-label">Main deliverables</div>
+          <div class="deliv">
+            <span>Biomarker ranking</span>
+            <span>Regulatory-network justification</span>
+            <span>Subtype logic</span>
+            <span>Minimal panel concept</span>
+            <span>Assay-translation notes</span>
+            <span>Validation cohort plan</span>
+          </div>
+          <p class="service-ext"><em>Extend with a partner</em>Assay design, qPCR / ddPCR validation, targeted panels, retrospective cohort testing, and clinical sample analysis.</p>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-num">06</div>
+        <div>
+          <h3>AI &amp; Knowledge-Graph Intelligence for Biomedical R&amp;D</h3>
+          <p class="service-role"><strong>Role in your project:</strong> supports pharma AI, digital twins, internal R&amp;D copilots, disease knowledge graphs, and explainable-AI systems. Helps you build AI grounded in curated biological mechanisms rather than unsupported associations.</p>
+          <div class="deliv-label">Main deliverables</div>
+          <div class="deliv">
+            <span>Disease-specific knowledge graph</span>
+            <span>Curated regulatory relations</span>
+            <span>TRANSFAC / TRANSPATH / HumanPSD mapping</span>
+            <span>AI-ready exports</span>
+            <span>Reasoning workflows</span>
+          </div>
+          <p class="service-ext"><em>Extend with a partner</em>Software engineering, data integration, dashboard development, and API integration.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT LEVELS -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow accent">Three levels of engagement</span>
+      <h2>Take the intelligence alone, or as far as the wet lab.</h2>
+      <p class="lede">The same mechanistic layer sits at the centre of every engagement. What changes is how far it runs — from a computational strategy package to a full translational program.</p>
+    </div>
+    <div class="levels reveal">
+
+      <div class="level-card">
+        <div class="level-tag">Level 1</div>
+        <h3>geneXplain Intelligence Package</h3>
+        <p>The computational and mechanistic strategy package. May include project-design consultation, analysis of your data or public data, TRANSFAC / TRANSPATH / HumanPSD-based interpretation, Genome Enhancer or upstream analysis where appropriate, and prioritisation of master regulators, biomarkers, promoters, targets, or therapeutic hypotheses — closing with an expert report and validation recommendations.</p>
+        <div class="level-suit"><strong>Suitable for</strong> teams who already have data, want to clarify biological mechanisms, or need to decide which direction to take before investing in experimental work.</div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-tag">Level 2</div>
+        <h3>geneXplain + Experimental Partner</h3>
+        <p>geneXplain remains responsible for mechanistic interpretation and design intelligence, while selected CROs or academic partners perform the experimental work — omics generation, qPCR, western blotting, reporter assays, CRISPR perturbation, immune-cell assays, organoid drug testing, cytotoxicity assays, biomarker-panel testing, or retrospective cohort validation.</p>
+        <p>The result becomes more than a computational hypothesis: a validated or validation-ready mechanistic development package.</p>
+        <div class="level-suit"><strong>Suitable for</strong> teams that want the mechanistic call backed by experimental evidence, without assembling the wet-lab chain themselves.</div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-tag">Level 3</div>
+        <h3>Full Translational Development</h3>
+        <p>The most comprehensive option. May include study design, data generation, computational mechanism reconstruction, candidate prioritisation, experimental validation, biomarker-panel design, manuscript- or grant-ready documentation, investor-facing materials, and a follow-up development roadmap.</p>
+        <p>Sold as a joint offering: geneXplain coordinates the biological interpretation; the experimental partner provides the wet-lab execution.</p>
+        <div class="level-suit"><strong>Suitable for</strong> pharma, biotech, diagnostics companies, and large research consortia running an end-to-end program.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER / CRO MODEL -->
+<section class="block" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow accent">The partner &amp; CRO model</span>
+      <h2>We are the intelligence layer. Partners bring the bench.</h2>
+      <p class="lede">geneXplain usually represents one part of a larger biomedical R&amp;D project — but it is the part that decides which experiments are run, which candidates advance, and which are dropped early. Pairing that layer with experimental partners creates a much stronger offering for pharma, biotech, diagnostics, and cell- and gene-therapy customers.</p>
+    </div>
+    <div class="model-grid reveal">
+      <div class="model-panel">
+        <div class="mp-label">geneXplain owns</div>
+        <h3>Mechanistic intelligence &amp; design</h3>
+        <ul>
+          <li>Causal mechanism reconstruction and master-regulator discovery</li>
+          <li>Target, biomarker, promoter, and combination prioritisation</li>
+          <li>Interpretation on TRANSFAC / TRANSPATH / HumanPSD</li>
+          <li>Expert report, design logic, and a focused validation plan</li>
+        </ul>
+      </div>
+      <div class="model-panel partner">
+        <div class="mp-label">Partner / CRO brings</div>
+        <h3>Data generation &amp; wet-lab validation</h3>
+        <ul>
+          <li>Omics generation, single-cell, proteomics, and qPCR / ddPCR</li>
+          <li>Reporter, perturbation, CRISPR, and immune-cell assays</li>
+          <li>Organoid drug testing, cytotoxicity, and xenograft models</li>
+          <li>Panel testing and retrospective cohort validation</li>
+        </ul>
+      </div>
+    </div>
+    <p class="model-join reveal">Together, a computational hypothesis becomes a <em>validated, validation-ready development package</em> — coordinated by geneXplain, executed with the right experimental partner.</p>
+  </div>
+</section>
+
+<!-- ACCOUNTABILITY -->
+<section class="block account">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:40px">
+      <span class="eyebrow">AI + human accountability</span>
+      <h2>A model can generate a conclusion. It can't take responsibility for one.</h2>
+    </div>
+    <div class="account-body reveal">
+      <div>
+        <p class="big">In a regulated pipeline, "the model said so" is not an answer. Someone has to <em>stand behind the science</em> — read the evidence, defend the call, and be reachable when it matters.</p>
+        <div class="quote-card">
+          <div class="ql">"The same DNA sequence is controlled by different transcription factors in different cell types. A model that pattern-matches will miss that. A person who knows the biology won't."</div>
+          <div class="qa">Prof. Dr. Alexander Kel · CEO &amp; CSO, co-author of TRANSFAC<sup>®</sup></div>
+        </div>
+      </div>
+      <div class="account-detail">
+        <p>A done-for-you engagement is built around a human expert who scopes the question, runs the mechanistic analysis, and is accountable for what comes back. That accountability is a property of the service model — a named scientist behind the result, not an automated report with no author.</p>
+        <p>For teams weighing how to defend a conclusion downstream, that human layer is often the point of the engagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VS CRO -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow accent">Solutions vs. a general CRO</span>
+      <h2>The landscape is crowded with shops that run pipelines. The depth is the difference.</h2>
+    </div>
+    <div class="contrast-grid reveal">
+      <div class="col-a">
+        <div class="col-head">A general bioinformatics CRO</div>
+        <div class="row">Generic omics pipelines, same tools as everyone</div>
+        <div class="row">Answers "what changed" — statistical enrichment</div>
+        <div class="row">No promoter-level TF binding depth or causal direction</div>
+        <div class="row">A report with no scientific author behind it</div>
+      </div>
+      <div class="col-b">
+        <div class="col-head">TRANSFAC Solutions</div>
+        <div class="row">Mechanistic analysis on TRANSFAC / TRANSPATH / HumanPSD</div>
+        <div class="row">Answers "why and how" — traceable to a curated record</div>
+        <div class="row">Regulation → pathway → disease → target, end to end</div>
+        <div class="row">A named expert accountable for the conclusion</div>
+      </div>
+    </div>
+    <p class="bridge reveal">To be clear, this contrast is with generic bioinformatics pipelines — not with the experimental partners we work alongside. We're the mechanistic intelligence layer; when a question needs the bench, that work runs through vetted partners who bring the wet-lab execution.</p>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="block" style="background:var(--paper-warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Who this is for</span>
+      <h2>For teams that want the result delivered — not the tools or the raw data.</h2>
+    </div>
+    <div class="for-grid reveal">
+      <div class="for-card">
+        <h3>Pharma &amp; biotech R&amp;D</h3>
+        <p>You have a target or a disease question and need a defensible mechanistic answer — with provenance and a human accountable for it.</p>
+        <span class="tag">Wants the answer, not the tool</span>
+      </div>
+      <div class="for-card">
+        <h3>Translational research leads</h3>
+        <p>You want the depth of the platform without the learning curve, scoped to your specific target or disease.</p>
+        <span class="tag">Depth without the build</span>
+      </div>
+      <div class="for-card">
+        <h3>Teams in regulated pipelines</h3>
+        <p>You need conclusions that hold up to scrutiny — traceable to evidence, signed by someone who can defend them.</p>
+        <span class="tag">Auditable &amp; accountable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final" id="talk">
+  <div class="narrow">
+    <span class="eyebrow accent" style="display:block;margin-bottom:22px">Start with a conversation</span>
+    <h2>Tell us the question. We'll scope the <em>answer.</em></h2>
+    <p>Every engagement is built case by case — scope, deliverables, and timeline agreed before work begins. The first step is a discovery call to understand what you're trying to resolve.</p>
+    <a href="#" class="btn-primary">Book a discovery call <span class="arr">→</span></a>
+    <div class="cta-note">No fixed package · scoped to your question · expert-delivered</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="brand">gene<span style="color:var(--accent-soft)">X</span>plain</div>
+    <div>TRANSFAC® · TRANSPATH® · HumanPSD™ — curated since 1988</div>
+    <div style="display:flex;gap:22px">
+      <a href="#capabilities">Capabilities →</a>
+      <a href="#talk">Book a discovery call →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
