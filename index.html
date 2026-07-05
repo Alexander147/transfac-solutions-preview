@@ -1,21 +1,625 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TRANSFAC Solutions — Sales Page Variants (Draft for Review)</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRANSFAC Solutions — Revised copy (DRAFT for discussion) | geneXplain</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'><rect width='1024' height='1024' rx='180' fill='%23ffffff'/><polygon points='414.583 588.769 459.863 639.949 346.663 767.897 256.103 767.897 414.583 588.769' fill='%23f19057'/><polygon points='414.583 435.231 459.863 384.051 346.663 256.103 256.103 256.103 414.583 435.231' fill='%2396b63d'/><polygon points='450.811 512 677.211 256.103 767.897 256.308 541.371 512 767.897 767.897 677.211 767.897 450.811 512' fill='%231b75bb'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#F2EFE6;color:#16201C;margin:0;padding:48px 20px;line-height:1.5}
-.wrap{max-width:640px;margin:0 auto}h1{font-size:26px;margin:0 0 6px}
-.sub{color:#2C3A33;margin:0 0 24px}
-.note{background:#EBE6D7;border:1px solid rgba(22,32,28,.14);border-radius:6px;padding:14px 16px;font-size:14px;color:#2C3A33;margin-bottom:26px}
-a.card{display:block;text-decoration:none;color:inherit;border:1px solid rgba(22,32,28,.14);border-radius:6px;padding:18px 20px;margin-bottom:14px;background:rgba(255,255,255,.5);transition:.15s}
-a.card:hover{border-color:#1F5C4D;transform:translateY(-1px)}
-.k{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#C8642F}
-.t{font-size:18px;font-weight:600;margin:4px 0 2px}.d{font-size:14px;color:#2C3A33}
-</style></head><body><div class="wrap">
-<h1>TRANSFAC Solutions — sales page</h1>
-<p class="sub">Layout options. Draft for team review.</p>
-<div class="note"><strong>Draft — not final.</strong> The &ldquo;Book a discovery call&rdquo; button is a placeholder, and the Prof. Kel quote is pending publication approval.</div>
-<a class="card" href="a.html"><div class="k">Variant A</div><div class="t">Selective</div><div class="d">The original elegant page + budget-at-risk framing, a compact 6-service-line strip, and the 3 engagement levels. Lightest touch.</div></a>
-<a class="card" href="d.html"><div class="k">Variant A+</div><div class="t">Selective + full service lines</div><div class="d">Variant A, but with the detailed six service lines &mdash; each with its Main deliverables &mdash; in place of the compact strip.</div></a>
-<a class="card" href="b.html"><div class="k">Variant B</div><div class="t">Full</div><div class="d">Everything in A plus full service lines with deliverables, the levels in full, and the partner/CRO model. Comprehensive one-pager.</div></a>
-<a class="card" href="c.html"><div class="k">Variant C</div><div class="t">Combined</div><div class="d">Full depth with the richer per-service wording and a bridge line reconciling &ldquo;vs. a CRO&rdquo; with &ldquo;we partner with CROs.&rdquo;</div></a>
-</div></body></html>
+  /* ==========================================================================
+     CANONICAL DESIGN-SYSTEM TOKENS — identical to transfac-solutions_vA-plus-ds.html.
+     ========================================================================== */
+  :root{
+    --gx-blue:#1C75BC;--gx-orange:#F19057;--gx-green:#97B63D;--gx-black:#000000;--gx-white:#FFFFFF;
+    --gx-font:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --gx-weight-heading:600;--gx-weight-tool:500;--gx-weight-body:400;
+    --gx-grey-050:#F5F7F9;--gx-grey-100:#EDF0F3;--gx-grey-200:#DBE1E6;--gx-grey-300:#C4CDD4;--gx-grey-400:#A0ACB6;
+    --gx-grey-500:#768693;--gx-grey-600:#596673;--gx-grey-700:#404D59;--gx-grey-800:#2D3843;--gx-grey-900:#1C2630;
+    --gx-blue-050:#E9F4FB;--gx-blue-100:#CAE4F6;--gx-blue-200:#A4CEEF;--gx-blue-300:#79B7E7;--gx-blue-400:#499BDF;
+    --gx-blue-500:#2985D1;--gx-blue-600:var(--gx-blue);--gx-blue-700:#13599A;--gx-blue-800:#0C457D;--gx-blue-900:#072F5A;
+    --gx-text-xs:0.75rem;--gx-text-sm:0.875rem;--gx-text-base:1rem;--gx-text-lg:1.125rem;--gx-text-xl:1.25rem;
+    --gx-text-2xl:1.5rem;--gx-text-3xl:1.875rem;--gx-text-4xl:2.25rem;--gx-text-5xl:3rem;--gx-text-6xl:3.75rem;--gx-text-7xl:4.5rem;
+    --gx-leading-none:1;--gx-leading-tight:1.15;--gx-leading-snug:1.3;--gx-leading-normal:1.5;--gx-leading-relaxed:1.65;
+    --gx-tracking-tight:-0.02em;--gx-tracking-normal:0;--gx-tracking-caps:0.05em;--gx-measure:34em;
+    --gx-space-1:0.25rem;--gx-space-2:0.5rem;--gx-space-3:0.75rem;--gx-space-4:1rem;--gx-space-5:1.5rem;--gx-space-6:2rem;
+    --gx-space-7:3rem;--gx-space-8:4rem;--gx-space-9:6rem;--gx-space-10:8rem;--gx-space-11:12rem;--gx-space-12:16rem;
+    --gx-shadow-1:0 1px 3px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.10);
+    --gx-shadow-2:0 4px 6px rgba(0,0,0,.14),0 1px 3px rgba(0,0,0,.10);
+    --gx-shadow-3:0 5px 15px rgba(0,0,0,.16),0 2px 5px rgba(0,0,0,.10);
+    --gx-shadow-4:0 10px 24px rgba(0,0,0,.18),0 4px 8px rgba(0,0,0,.10);
+    --gx-shadow-5:0 15px 35px rgba(0,0,0,.20),0 5px 15px rgba(0,0,0,.10);
+    --gx-radius-none:0;--gx-radius-sm:2px;--gx-radius:4px;--gx-radius-lg:8px;--gx-radius-full:9999px;--gx-border:1px;--gx-border-2:2px;
+    --gx-on-dark:var(--gx-white);--gx-on-dark-muted:var(--gx-grey-300);--gx-on-blue:var(--gx-white);--gx-on-blue-muted:#B8D4EA;
+    --gx-primary:var(--gx-blue-600);--gx-text-strong:var(--gx-grey-900);--gx-text-default:var(--gx-grey-800);
+    --gx-text-secondary:var(--gx-grey-600);--gx-text-muted:var(--gx-grey-500);--gx-surface:var(--gx-white);
+    --gx-surface-sunken:var(--gx-grey-050);--gx-surface-subtle:var(--gx-grey-100);--gx-border-color:var(--gx-grey-200);--gx-focus-ring:var(--gx-blue-500);
+    /* draft-review accent (not a brand token — discussion build only) */
+    --gx-flag:#C0392B;--gx-flag-bg:#FCEEEC;--gx-flag-border:#E8C4BF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--gx-white);color:var(--gx-grey-800);font-family:var(--gx-font);font-size:var(--gx-text-lg);line-height:var(--gx-leading-normal);-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gx-blue-600);color:var(--gx-white)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 var(--gx-space-6)}
+  .narrow{max-width:760px;margin:0 auto;padding:0 var(--gx-space-6)}
+  .eyebrow{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);line-height:var(--gx-leading-none);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-blue-600)}
+  h1,h2,h3{font-family:var(--gx-font);font-weight:var(--gx-weight-heading)}
+  em{font-style:normal;color:var(--gx-blue-600);font-weight:600}
+  .problem em,.account em,.cta-final em{color:var(--gx-white);font-weight:600}
+
+  /* ---------- DRAFT ANNOTATION LAYER (discussion build only) ---------- */
+  .draft-banner{position:sticky;top:0;z-index:60;background:var(--gx-flag);color:#fff;font-size:var(--gx-text-sm);font-weight:var(--gx-weight-tool);text-align:center;padding:var(--gx-space-3) var(--gx-space-5);line-height:var(--gx-leading-snug)}
+  .draft-banner strong{font-weight:var(--gx-weight-heading)}
+  .flag{background:var(--gx-flag-bg);border-bottom:2px dashed var(--gx-flag);padding:0 2px;border-radius:2px}
+  .problem .flag,.account .flag,.cta-final .flag{background:rgba(255,255,255,.14);border-bottom-color:#F3B4AC;color:#fff}
+  .flag-note{display:inline-block;font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:0.01em;color:var(--gx-flag);background:var(--gx-flag-bg);border:1px solid var(--gx-flag-border);border-radius:var(--gx-radius);padding:3px 9px;margin-top:var(--gx-space-2)}
+  .account .flag-note{color:#fff;background:rgba(192,57,43,.9);border-color:rgba(255,255,255,.35)}
+  .draft-chip{display:inline-block;font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-heading);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-flag);background:var(--gx-flag-bg);border:1px solid var(--gx-flag-border);border-radius:var(--gx-radius-full);padding:4px 13px;margin-bottom:var(--gx-space-4)}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:44px;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:var(--gx-border) solid var(--gx-grey-100)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:var(--gx-space-8)}
+  .nav-logo{display:inline-flex;align-items:center;text-decoration:none}
+  .nav-logo svg{height:26px;width:auto;display:block}
+  .nav-cta{font-family:var(--gx-font);font-size:var(--gx-text-sm);font-weight:var(--gx-weight-tool);line-height:var(--gx-leading-none);letter-spacing:0.01em;color:var(--gx-white);background:var(--gx-primary);padding:var(--gx-space-3) var(--gx-space-5);border-radius:var(--gx-radius);text-decoration:none;display:inline-flex;align-items:center;box-shadow:var(--gx-shadow-1);transition:background .2s ease,transform .15s ease,box-shadow .2s ease}
+  .nav-cta:hover{background:var(--gx-blue-700);transform:translateY(-1px);box-shadow:var(--gx-shadow-2)}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:var(--gx-space-9) 0;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:var(--gx-space-8);align-items:start}
+  .hero h1{font-size:clamp(var(--gx-text-4xl),5.2vw,var(--gx-text-6xl));font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-tight);letter-spacing:var(--gx-tracking-tight);color:var(--gx-grey-900);margin:var(--gx-space-5) 0 0;max-width:15ch}
+  .hero-sub{margin-top:var(--gx-space-6);font-size:var(--gx-text-xl);font-weight:var(--gx-weight-body);line-height:var(--gx-leading-normal);color:var(--gx-grey-700);max-width:44ch}
+  .hero-cta-row{margin-top:var(--gx-space-7);display:flex;gap:var(--gx-space-4);align-items:center;flex-wrap:wrap}
+  .btn-primary{font-family:var(--gx-font);font-size:var(--gx-text-base);font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-none);letter-spacing:0.01em;background:var(--gx-primary);color:var(--gx-white);padding:var(--gx-space-4) var(--gx-space-6);border-radius:var(--gx-radius);text-decoration:none;display:inline-flex;align-items:center;gap:var(--gx-space-2);box-shadow:var(--gx-shadow-1);transition:background .2s ease,transform .15s ease,box-shadow .2s ease}
+  .btn-primary:hover{background:var(--gx-blue-700);transform:translateY(-1px);box-shadow:var(--gx-shadow-2)}
+  .btn-primary .arr{transition:transform .2s ease}
+  .btn-primary:hover .arr{transform:translateX(4px)}
+  .btn-text{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-tool);color:var(--gx-grey-700);text-decoration:none;border-bottom:var(--gx-border) solid var(--gx-grey-300);padding-bottom:2px}
+  .btn-text:hover{color:var(--gx-blue-600);border-color:var(--gx-blue-600)}
+  .hero-ribbon{margin-top:var(--gx-space-5);display:inline-flex;align-items:center;gap:var(--gx-space-3);background:var(--gx-blue-050);border:var(--gx-border) solid var(--gx-blue-200);border-radius:var(--gx-radius-full);padding:var(--gx-space-2) var(--gx-space-5);font-size:var(--gx-text-sm);font-weight:var(--gx-weight-tool);color:var(--gx-blue-700)}
+  .hero-ribbon b{font-weight:var(--gx-weight-heading);color:var(--gx-blue-700)}
+
+  .exchange{background:var(--gx-white);border-radius:var(--gx-radius-lg);padding:var(--gx-space-6);position:relative;box-shadow:var(--gx-shadow-2)}
+  .exchange-label{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);line-height:var(--gx-leading-none);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-blue-600);margin-bottom:var(--gx-space-4)}
+  .ex-node{position:relative;padding-left:var(--gx-space-6);padding-bottom:var(--gx-space-5)}
+  .ex-node:last-child{padding-bottom:0}
+  .ex-node::before{content:"";position:absolute;left:5px;top:6px;width:9px;height:9px;border-radius:var(--gx-radius-full);background:var(--gx-white);border:var(--gx-border-2) solid var(--gx-blue-600);z-index:2}
+  .ex-node.is-answer::before{background:var(--gx-blue-600);border-color:var(--gx-blue-600);box-shadow:0 0 0 4px var(--gx-blue-100)}
+  .ex-node:not(:last-child)::after{content:"";position:absolute;left:9px;top:14px;bottom:-2px;width:2px;background:linear-gradient(var(--gx-blue-200),var(--gx-blue-600))}
+  .ex-kind{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-grey-600)}
+  .ex-text{font-family:var(--gx-font);font-size:var(--gx-text-base);font-weight:var(--gx-weight-body);line-height:var(--gx-leading-snug);letter-spacing:-0.005em;margin-top:3px}
+  .ex-node.is-answer .ex-text{color:var(--gx-blue-600);font-weight:600}
+  .ex-sign{font-size:var(--gx-text-sm);color:var(--gx-grey-600);margin-top:var(--gx-space-2);font-family:var(--gx-font)}
+  .ex-sign strong{color:var(--gx-blue-600);font-weight:600}
+
+  /* ---------- STAT STRIP ---------- */
+  .strip{border-top:var(--gx-border) solid var(--gx-grey-200);border-bottom:var(--gx-border) solid var(--gx-grey-200);background:var(--gx-blue-050)}
+  .strip-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:var(--gx-space-6);border-right:var(--gx-border) solid var(--gx-grey-100)}
+  .stat:last-child{border-right:none}
+  .stat-num{font-family:var(--gx-font);font-size:var(--gx-text-4xl);font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-none);letter-spacing:var(--gx-tracking-tight);color:var(--gx-blue-600)}
+  .stat-num span{font-size:var(--gx-text-xl);color:var(--gx-blue-400)}
+  .stat-label{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-body);color:var(--gx-grey-600);margin-top:var(--gx-space-2);line-height:var(--gx-leading-snug)}
+
+  /* ---------- SECTION BASE ---------- */
+  section.block{padding:var(--gx-space-9) 0}
+  .section-head{margin-bottom:var(--gx-space-8)}
+  .section-head h2{font-size:clamp(var(--gx-text-3xl),3.6vw,var(--gx-text-5xl));font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-tight);letter-spacing:var(--gx-tracking-tight);margin-top:var(--gx-space-4);max-width:20ch}
+  .lede{font-size:var(--gx-text-xl);font-weight:var(--gx-weight-body);color:var(--gx-grey-700);max-width:var(--gx-measure);margin-top:var(--gx-space-5);line-height:var(--gx-leading-normal)}
+
+  .problem{background:var(--gx-blue-900);color:var(--gx-white)}
+  .problem .eyebrow{color:var(--gx-blue-300)}
+  .problem h2{color:var(--gx-white)}
+  .problem .lede{color:var(--gx-on-blue-muted)}
+  .pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--gx-blue-700);border:var(--gx-border) solid var(--gx-blue-700);margin-top:var(--gx-space-2)}
+  .pain{background:var(--gx-blue-900);padding:var(--gx-space-6)}
+  .pain-q{font-family:var(--gx-font);font-size:var(--gx-text-xl);font-weight:var(--gx-weight-tool);line-height:var(--gx-leading-snug);letter-spacing:-0.005em;color:var(--gx-white)}
+  .pain-d{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-body);color:var(--gx-on-blue-muted);margin-top:var(--gx-space-3);line-height:var(--gx-leading-normal)}
+  .pain-tag{display:block;margin-top:var(--gx-space-3);font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-heading);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-blue-300)}
+
+  .depth-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gx-space-7);align-items:center}
+  .layer{border-left:var(--gx-border-2) solid var(--gx-grey-200);padding:var(--gx-space-1) 0 var(--gx-space-1) var(--gx-space-5);margin-bottom:var(--gx-space-6);position:relative}
+  .layer::before{content:"";position:absolute;left:-2px;top:8px;width:2px;height:26px;background:var(--gx-blue-600)}
+  .layer-name{font-family:var(--gx-font);font-size:var(--gx-text-sm);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-normal);color:var(--gx-blue-600)}
+  .layer-desc{font-size:var(--gx-text-base);font-weight:var(--gx-weight-body);color:var(--gx-grey-700);margin-top:var(--gx-space-2);line-height:var(--gx-leading-normal)}
+  .depth-aside{background:var(--gx-blue-100);border-radius:var(--gx-radius-lg);padding:var(--gx-space-6)}
+  .depth-aside h3{font-size:var(--gx-text-2xl);font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-snug);letter-spacing:var(--gx-tracking-normal);color:var(--gx-grey-900);margin-bottom:var(--gx-space-4)}
+  .depth-aside p{font-size:var(--gx-text-base);font-weight:var(--gx-weight-body);color:var(--gx-grey-700);line-height:var(--gx-leading-normal)}
+  .depth-aside p + p{margin-top:var(--gx-space-3)}
+
+  /* not-a-routine band */
+  .routine{background:var(--gx-blue-050);border-top:var(--gx-border) solid var(--gx-grey-200);border-bottom:var(--gx-border) solid var(--gx-grey-200);text-align:center}
+  .routine h2{margin:var(--gx-space-4) auto 0;max-width:22ch}
+  .routine .lede{margin-left:auto;margin-right:auto;max-width:40em}
+
+  .account{background:var(--gx-blue-800);color:var(--gx-white)}
+  .account .eyebrow{color:var(--gx-white)}
+  .account h2{color:var(--gx-white);font-size:clamp(var(--gx-text-3xl),3.4vw,var(--gx-text-4xl));font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-tight);letter-spacing:var(--gx-tracking-tight);max-width:18ch}
+  .account-body{display:grid;grid-template-columns:1.1fr 0.9fr;gap:var(--gx-space-8);align-items:start;margin-top:var(--gx-space-2)}
+  .account p.big{font-family:var(--gx-font);font-size:clamp(var(--gx-text-xl),2.4vw,var(--gx-text-2xl));font-weight:var(--gx-weight-tool);line-height:var(--gx-leading-snug);letter-spacing:-0.005em;font-style:normal}
+  .account-detail{font-size:var(--gx-text-base);font-weight:var(--gx-weight-body);color:var(--gx-on-blue-muted);line-height:var(--gx-leading-normal)}
+  .account-detail p + p{margin-top:var(--gx-space-4)}
+  .quote-card{border-left:var(--gx-border-2) solid var(--gx-blue-300);padding:var(--gx-space-1) 0 var(--gx-space-1) var(--gx-space-5);margin-top:var(--gx-space-3)}
+  .quote-card .ql{font-family:var(--gx-font);font-style:normal;font-size:var(--gx-text-xl);font-weight:var(--gx-weight-body);line-height:var(--gx-leading-snug);letter-spacing:-0.005em;color:var(--gx-white)}
+  .quote-card .qa{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-caps);color:var(--gx-on-blue-muted);margin-top:var(--gx-space-3);text-transform:uppercase}
+
+  /* IP & data (three cards) */
+  .ip{background:var(--gx-white)}
+  .ip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gx-space-5)}
+  .ip-card{background:var(--gx-blue-050);border-radius:var(--gx-radius-lg);padding:var(--gx-space-6);box-shadow:var(--gx-shadow-1)}
+  .ip-card h3{font-size:var(--gx-text-lg);font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-snug);color:var(--gx-grey-900);margin-bottom:var(--gx-space-3)}
+  .ip-card p{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-body);color:var(--gx-grey-700);line-height:var(--gx-leading-normal)}
+  .ip-card .tag{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-heading);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-blue-600);margin-top:var(--gx-space-3);display:block}
+
+  .contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:var(--gx-border) solid var(--gx-grey-200);border-radius:var(--gx-radius-lg);overflow:hidden;position:relative}
+  .col-head{padding:var(--gx-space-5) var(--gx-space-6);font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase}
+  .col-a{background:var(--gx-white)}
+  .col-b{background:var(--gx-blue-100)}
+  .col-a .col-head{background:var(--gx-blue-050);color:var(--gx-grey-600);border-bottom:var(--gx-border) solid var(--gx-grey-200)}
+  .col-b .col-head{background:var(--gx-blue-700);color:var(--gx-white);border-bottom:var(--gx-border) solid var(--gx-blue-700)}
+  .row{padding:var(--gx-space-5) var(--gx-space-6);font-size:var(--gx-text-base);line-height:var(--gx-leading-normal);border-bottom:var(--gx-border) solid var(--gx-grey-200)}
+  .col-a .row{color:var(--gx-grey-700);font-weight:var(--gx-weight-body)}
+  .col-b .row{color:var(--gx-grey-900);font-weight:var(--gx-weight-tool)}
+  .row:last-child{border-bottom:none}
+
+  .for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gx-space-5)}
+  .for-card{border-top:var(--gx-border-2) solid var(--gx-grey-900);padding-top:var(--gx-space-5)}
+  .for-card h3{font-size:var(--gx-text-xl);font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-snug);letter-spacing:0.004em;margin-bottom:var(--gx-space-2)}
+  .for-card p{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-body);color:var(--gx-grey-600);line-height:var(--gx-leading-normal)}
+  .for-card .tag{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-blue-600);margin-top:var(--gx-space-3);display:block}
+  .ways .for-card{border-top-color:var(--gx-blue-600)}
+  .ways .for-card .tag{color:var(--gx-blue-600);font-weight:var(--gx-weight-heading)}
+
+  /* testimonials */
+  .tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gx-space-5)}
+  .tst{background:var(--gx-white);border:var(--gx-border) solid var(--gx-grey-200);border-radius:var(--gx-radius-lg);padding:var(--gx-space-6);box-shadow:var(--gx-shadow-1)}
+  .tst .ql{font-size:var(--gx-text-base);font-weight:var(--gx-weight-body);line-height:var(--gx-leading-normal);color:var(--gx-grey-800)}
+  .tst .qa{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:0.01em;color:var(--gx-flag);margin-top:var(--gx-space-4)}
+
+  .cta-final{background:var(--gx-blue-800);color:var(--gx-white);text-align:center;padding:var(--gx-space-9) 0}
+  .cta-final .eyebrow{color:var(--gx-white)}
+  .cta-final h2{color:var(--gx-white);font-size:clamp(var(--gx-text-3xl),4.6vw,var(--gx-text-6xl));font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-tight);letter-spacing:var(--gx-tracking-tight);max-width:18ch;margin:0 auto}
+  .cta-final p{color:var(--gx-on-blue-muted);font-size:var(--gx-text-lg);max-width:var(--gx-measure);margin:var(--gx-space-5) auto var(--gx-space-7)}
+  .cta-final .btn-primary{font-size:var(--gx-text-lg);padding:var(--gx-space-4) var(--gx-space-7);background:var(--gx-white);color:var(--gx-blue-700)}
+  .cta-final .btn-primary:hover{background:var(--gx-blue-100);color:var(--gx-blue-800)}
+  .cta-note{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-caps);color:var(--gx-on-blue-muted);margin-top:var(--gx-space-6);text-transform:uppercase}
+
+  footer{background:var(--gx-black);color:var(--gx-on-dark-muted);border-top:var(--gx-border) solid var(--gx-grey-800);padding:var(--gx-space-7) 0}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--gx-space-4);font-size:var(--gx-text-xs)}
+  .foot-logo{display:inline-flex;align-items:center}
+  .foot-logo svg{height:22px;width:auto;display:block}
+  .foot-inner a{color:var(--gx-on-dark-muted);text-decoration:none}
+  .foot-inner a:hover{color:var(--gx-blue-300)}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gx-space-6)}
+  .svc{border-top:var(--gx-border-2) solid var(--gx-blue-600);padding-top:var(--gx-space-5)}
+  .svc-idx{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-heading);letter-spacing:var(--gx-tracking-caps);color:var(--gx-blue-600)}
+  .svc h3{font-size:var(--gx-text-lg);font-weight:var(--gx-weight-heading);line-height:var(--gx-leading-snug);letter-spacing:0.004em;margin:var(--gx-space-3) 0}
+  .svc-role{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-body);color:var(--gx-grey-600);line-height:var(--gx-leading-normal)}
+  .svc-deliv-label{font-family:var(--gx-font);font-size:var(--gx-text-xs);font-weight:var(--gx-weight-tool);letter-spacing:var(--gx-tracking-caps);text-transform:uppercase;color:var(--gx-grey-600);margin-top:var(--gx-space-5);display:block}
+  .svc-chips{display:flex;flex-wrap:wrap;gap:var(--gx-space-2);margin-top:var(--gx-space-3)}
+  .svc-chips span{font-size:var(--gx-text-sm);font-weight:var(--gx-weight-tool);letter-spacing:0.01em;line-height:var(--gx-leading-snug);background:var(--gx-blue-100);border-radius:var(--gx-radius);padding:var(--gx-space-2) var(--gx-space-3);color:var(--gx-grey-700)}
+
+  @media (max-width:880px){
+    .svc-grid{grid-template-columns:1fr}
+    .hero-grid{grid-template-columns:1fr;gap:var(--gx-space-7)}
+    .depth-grid{grid-template-columns:1fr;gap:var(--gx-space-6)}
+    .account-body{grid-template-columns:1fr;gap:var(--gx-space-6)}
+    .strip-grid{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:var(--gx-border) solid var(--gx-grey-100)}
+    .pain-grid{grid-template-columns:1fr}
+    .for-grid,.ip-grid,.tst-grid{grid-template-columns:1fr}
+    .contrast-grid{grid-template-columns:1fr}
+    .col-a .col-head{border-bottom:none}
+  }
+  @media (max-width:560px){
+    body{font-size:var(--gx-text-base)}
+    .wrap,.narrow{padding:0 var(--gx-space-5)}
+    .strip-grid{grid-template-columns:1fr}
+    .stat{border-right:none;border-bottom:var(--gx-border) solid var(--gx-grey-100)}
+    .stat:last-child{border-bottom:none}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="draft-banner">
+  <strong>DRAFT — for team discussion, not the final page.</strong>
+  Everything <span style="border-bottom:2px dashed #F3B4AC">highlighted</span> is an unconfirmed best-guess (stat numbers, pay-on-success terms, testimonials, IP wording, the Prof. Kel quote). Nothing here has passed the accuracy gate.
+</div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo" aria-label="geneXplain">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3267.83 1024"><polygon points="1497.842 588.762 1543.121 639.941 1429.923 767.887 1339.365 767.887 1497.842 588.762" fill="#f19057"/><polygon points="1497.842 435.227 1543.121 384.049 1429.923 256.103 1339.365 256.103 1497.842 435.227" fill="#96b63d"/><polygon points="1534.069 511.995 1760.464 256.103 1851.149 256.308 1624.627 511.995 1851.149 767.887 1760.464 767.887 1534.069 511.995" fill="#1b75bb"/><path d="M453.287,509.01h45.908v104.079c-27.247,22.013-65.318,33.202-102.27,33.202-80.999,0-140.719-56.329-140.719-134.294s59.721-134.3,141.461-134.3c43.676,0,80.25,14.548,104.887,42.53l-30.606,29.844c-20.53-20.516-44.047-29.844-72.042-29.844-55.613,0-94.804,37.674-94.804,91.77,0,52.97,39.191,91.77,94.433,91.77,18.661,0,36.952-3.736,53.752-13.435v-81.323Z"/><path d="M768.306,601.9v40.662h-195.962v-261.135h190.735v40.662h-142.21v67.895h126.159v39.92h-126.159v71.996h147.437Z"/><path d="M1063.908,381.428v261.135h-39.94l-144.071-176.823v176.823h-48.154v-261.135h39.94l144.078,176.823v-176.823h48.147Z"/><path d="M1339.365,601.9v40.662h-195.962v-261.135h190.735v40.662h-142.21v67.895h126.159v39.92h-126.159v71.996h147.437Z"/><path d="M2069.88,474.318c0,57.448-42.55,92.89-111.233,92.89h-58.972v75.355h-48.525v-261.135h107.497c68.684,0,111.233,35.071,111.233,92.89ZM2020.984,474.318c0-32.825-22.027-51.851-64.576-51.851h-56.733v103.701h56.733c42.55,0,64.576-19.019,64.576-51.851Z"/><path d="M2127.732,381.428h48.525v220.102h136.612v41.033h-185.137v-261.135Z"/><path d="M2531.951,582.126h-130.637l-25.756,60.436h-50.016l117.58-261.135h47.777l117.944,261.135h-50.764l-26.127-60.436ZM2515.906,544.081l-49.274-114.155-48.896,114.155h98.17Z"/><path d="M2651.386,381.428h48.525v261.135h-48.525v-261.135Z"/><path d="M3011.935,381.428v261.135h-39.94l-144.071-176.823v176.823h-48.154v-261.135h39.94l144.078,176.823v-176.823h48.147Z"/></svg>
+    </a>
+    <a href="#talk" class="nav-cta">Book a discovery call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">TRANSFAC Solutions — we do it for you</span>
+      <h1>Give us your target or disease. We'll tell you what's <em>driving it</em> — and prove it.</h1>
+      <p class="hero-sub">No software to learn. No raw data to wrangle. Our scientists analyse your data across TRANSFAC, TRANSPATH and HumanPSD, rank the targets that actually matter, and hand you a clear mechanistic answer — validated in the lab, with a named expert behind it. Your data and any resulting IP stay yours.</p>
+      <div class="hero-cta-row">
+        <a href="#talk" class="btn-primary">Book a discovery call <span class="arr">→</span></a>
+        <a href="#difference" class="btn-text">See what's behind the work</a>
+      </div>
+      <div class="hero-ribbon"><b>Pay on success</b> — <span class="flag">a low starting fee, the rest only when your targets validate</span></div>
+    </div>
+
+    <div class="exchange reveal">
+      <div class="exchange-label">How an engagement runs</div>
+      <div class="ex-node">
+        <div class="ex-kind">You bring</div>
+        <div class="ex-text">"Here's our target. Here's the disease. We don't know what's driving it."</div>
+      </div>
+      <div class="ex-node">
+        <div class="ex-kind">We scope it</div>
+        <div class="ex-text">One call, then a defined engagement — priced case by case, with IP and data terms agreed up front.</div>
+      </div>
+      <div class="ex-node is-answer">
+        <div class="ex-kind">You get back</div>
+        <div class="ex-text">A ranked, mechanistically-justified answer — validated in the lab, traceable to the evidence.</div>
+        <div class="ex-sign">— with <strong>a named scientist</strong> who stands behind the result.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STAT STRIP -->
+<div class="strip">
+  <div class="wrap strip-grid">
+    <div class="stat reveal">
+      <div class="stat-num flag">50<span>+</span></div>
+      <div class="stat-label"><span class="flag">funded R&amp;D projects delivered (EU · BMBF · national grants)</span></div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num flag">35<span>+</span></div>
+      <div class="stat-label"><span class="flag">disease mechanisms of action uncovered</span></div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num flag">3</div>
+      <div class="stat-label"><span class="flag">drugs repurposed to new indications</span></div>
+    </div>
+    <div class="stat reveal">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">of results and IP stay with you</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="block problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The reason teams come to us</span>
+      <h2>Sometimes you don't want the platform. You want the answer.</h2>
+      <p class="lede">You have the question and the data. What you're missing is the time, the specialist depth, and someone who will put their name on the conclusion. That's what we do.</p>
+    </div>
+    <div class="pain-grid reveal">
+      <div class="pain">
+        <div class="pain-q">"We have a result — now what's the next experiment?"</div>
+        <div class="pain-d">A list of differentially expressed genes isn't a plan. We deliver the mechanism and the next step, not another table to read.</div>
+        <span class="pain-tag">From data to decision</span>
+      </div>
+      <div class="pain">
+        <div class="pain-q">"Too many candidates, no way to rank them."</div>
+        <div class="pain-d">We turn a long list into a short, ordered one — built on causal regulatory biology, not statistical association.</div>
+        <span class="pain-tag">Ranked, not listed</span>
+      </div>
+      <div class="pain">
+        <div class="pain-q">"Our pipeline is five disconnected tools."</div>
+        <div class="pain-d">Gene → regulation → pathway → disease → target, run as one engagement by the people who built the underlying knowledge.</div>
+        <span class="pain-tag">One engagement</span>
+      </div>
+      <div class="pain">
+        <div class="pain-q">"When the analysis is wrong, who answers for it?"</div>
+        <div class="pain-d">A model can't take responsibility for a conclusion. A named expert can.</div>
+        <span class="pain-tag">Accountable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DIFFERENCE / DEPTH -->
+<section class="block" id="difference">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What's behind the work</span>
+      <h2>Every bioinformatics shop runs analyses. Almost none run them on this.</h2>
+      <p class="lede">The difference isn't that we run analyses — everyone does. It's the hand-curated, mechanistic knowledge underneath, built and maintained for nearly four decades.</p>
+    </div>
+    <div class="depth-grid reveal">
+      <div>
+        <div class="layer">
+          <div class="layer-name">TRANSFAC</div>
+          <div class="layer-desc">Transcription factors and experimentally verified binding sites — the most comprehensive library of DNA motifs anywhere.</div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">TRANSPATH</div>
+          <div class="layer-desc">Causal, directional signalling reactions — not correlation networks. Each with direction, cellular context, and a primary-literature source.</div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">HumanPSD</div>
+          <div class="layer-desc">Diseases, clinical trials, biomarkers and drug targets with mechanistic annotations — molecular biology connected to clinical context.</div>
+        </div>
+      </div>
+      <div class="depth-aside">
+        <h3>Mechanism, not correlation.</h3>
+        <p>A standard CRO runs the same omics pipelines everyone else does and tells you what changed. The harder question — <em>why</em> it changed, and what to do next — is where most projects stop and ours begins.</p>
+        <p>Because our answer traces through regulation → pathway → disease, every conclusion is anchored to a record you can audit, not a black box you have to trust.</p>
+        <p>And the biggest cost in R&amp;D is rarely the data itself — it's moving forward on the wrong biological hypothesis. This is the layer that lowers the budget you put at risk, before the expensive experiments begin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOT A ROUTINE SERVICE -->
+<section class="block routine">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:0">
+      <span class="eyebrow">Not a routine service</span>
+      <h2>Bring us the problem a standard pipeline can't solve.</h2>
+      <p class="lede">Anyone can run a standard pipeline and guarantee a reproducible result — for a few hundred dollars. That isn't us. Our work is the non-routine, inventive part: the disease no one has mapped, the resistance no one can explain, the target no one else will commit to. <span class="flag">Fifty funded research projects, many at the frontier of science and genuinely inventive,</span> are the track record behind that.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOUNTABILITY -->
+<section class="block account">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:var(--gx-space-7)">
+      <span class="eyebrow">AI + human accountability</span>
+      <h2>A model can generate a conclusion. It can't take responsibility for one.</h2>
+    </div>
+    <div class="account-body reveal">
+      <div>
+        <p class="big">In a regulated pipeline, "the model said so" is not an answer. Someone has to <em>stand behind the science</em> — read the evidence, defend the call, and be reachable when it matters.</p>
+        <div class="quote-card">
+          <div class="ql"><span class="flag">"The same DNA sequence is controlled by different transcription factors in different cell types. A model that pattern-matches will miss that. A person who knows the biology won't."</span></div>
+          <div class="qa">Prof. Dr. Alexander Kel · CEO &amp; CSO, co-author of TRANSFAC</div>
+          <span class="flag-note">Quote pending publication approval</span>
+        </div>
+      </div>
+      <div class="account-detail">
+        <p>Every done-for-you engagement is built around a named scientist who scopes the question, runs the analysis, and is accountable for what comes back — not an automated report with no author.</p>
+        <p>For teams that have to defend a conclusion downstream, that's often the whole point of the engagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR IP · YOUR DATA (new) -->
+<section class="block ip">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Your IP. Your data.</span>
+      <h2>The results are yours — and we put that in writing.</h2>
+    </div>
+    <div class="ip-grid reveal">
+      <div class="ip-card">
+        <h3>Your IP stays yours</h3>
+        <p>Any target, biomarker or discovery from the work belongs to you — stated explicitly in the contract, on your terms. <span class="flag">Where it helps, we'll go as far as structuring the work through a separate entity you control (the model large pharma has used for exactly this).</span></p>
+        <span class="tag">100% yours</span>
+      </div>
+      <div class="ip-card">
+        <h3>Your data stays protected</h3>
+        <p>Not ready to hand over sensitive data on day one? We can start on abstract or example data to show you how it works, then run on yours once you're comfortable. An NDA comes first, always.</p>
+        <span class="tag">NDA first</span>
+      </div>
+      <div class="ip-card">
+        <h3>No open questions before we start</h3>
+        <p>Scope, deliverables, IP ownership and data handling are all agreed before any work begins.</p>
+        <span class="tag">Agreed up front</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VS CRO -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Solutions vs. a general CRO</span>
+      <h2>The market is full of shops that run pipelines. Depth is the difference.</h2>
+    </div>
+    <div class="contrast-grid reveal">
+      <div class="col-a">
+        <div class="col-head">A general bioinformatics CRO</div>
+        <div class="row">Generic omics pipelines, same tools as everyone</div>
+        <div class="row">Answers "what changed" — statistical enrichment</div>
+        <div class="row">No promoter-level TF binding depth or causal direction</div>
+        <div class="row">A report with no scientist behind it</div>
+      </div>
+      <div class="col-b">
+        <div class="col-head">TRANSFAC Solutions</div>
+        <div class="row">Mechanistic analysis on TRANSFAC / TRANSPATH / HumanPSD</div>
+        <div class="row">Answers "why and how" — traceable to a curated record</div>
+        <div class="row">Regulation → pathway → disease → target, end to end</div>
+        <div class="row">A named expert accountable for the conclusion — and targets validated in the lab</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="block" style="background:var(--gx-blue-050);border-top:var(--gx-border) solid var(--gx-grey-200);border-bottom:var(--gx-border) solid var(--gx-grey-200)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Who this is for</span>
+      <h2>For teams that want the result delivered — not the tools or the raw data.</h2>
+    </div>
+    <div class="for-grid reveal">
+      <div class="for-card">
+        <h3>Pharma &amp; biotech R&amp;D</h3>
+        <p>You have a target or a disease question and need a defensible mechanistic answer — with provenance and a human accountable for it.</p>
+        <span class="tag">Wants the answer, not the tool</span>
+      </div>
+      <div class="for-card">
+        <h3>Translational research leads</h3>
+        <p>You want the depth of the platform without the learning curve, scoped to your specific target or disease.</p>
+        <span class="tag">Depth without the build</span>
+      </div>
+      <div class="for-card">
+        <h3>Teams in regulated pipelines</h3>
+        <p>You need conclusions that hold up to scrutiny — traceable to evidence, signed by someone who can defend them.</p>
+        <span class="tag">Auditable &amp; accountable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE LINES -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we actually do</span>
+      <h2>Six service lines — each one narrows an expensive decision before you fund it.</h2>
+      <p class="lede">Every engagement is scoped case by case, but the work falls into six lines. Each takes a large, uncertain search space — targets, resistance mechanisms, promoters, biomarkers, therapy designs — and returns the few candidates that are mechanistically justified, with the deliverables to act on them.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-idx">01</div>
+        <h3>Disease Mechanism Reconstruction, Master-Regulator Discovery &amp; Drug-Target Prioritisation</h3>
+        <div class="svc-role">Supports early translational research, target discovery, disease-mechanism clarification, and consortium project design.</div>
+        <span class="svc-deliv-label">Main deliverables</span>
+        <div class="svc-chips"><span>Disease-control network</span><span>Transcription factor analysis</span><span>Upstream pathway reconstruction</span><span>Master-regulator ranking</span><span>Druggable target shortlist</span><span>Mechanism report</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-idx">02</div>
+        <h3>Treatment Response, Resistance Mechanisms &amp; Rational Combination Therapy Intelligence</h3>
+        <div class="svc-role">Supports drug rescue, oncology resistance studies, responder / non-responder analysis, and combination-therapy design.</div>
+        <span class="svc-deliv-label">Main deliverables</span>
+        <div class="svc-chips"><span>Resistance-driver map</span><span>Pathway-rewiring analysis</span><span>Master regulators of non-response</span><span>Rational combination hypotheses</span><span>Resistance biomarker shortlist</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-idx">03</div>
+        <h3>Intelligent Promoter Design &amp; Synthetic Regulatory-Element Engineering</h3>
+        <div class="svc-role">Supports gene-therapy vector design, synthetic biology, engineered expression systems, and inducible construct development.</div>
+        <span class="svc-deliv-label">Main deliverables</span>
+        <div class="svc-chips"><span>Promoter grammar analysis</span><span>Tissue-/cell-specific regulatory logic</span><span>Candidate promoter/enhancer designs</span><span>Specificity assessment</span><span>Ranked constructs</span><span>Validation plan</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-idx">04</div>
+        <h3>CRISPR, CAR-T &amp; Cell / Gene-Therapy Design Intelligence</h3>
+        <div class="svc-role">Supports advanced-therapy design, CAR-T / CAR-NK target selection, CRISPR perturbation strategy, and regulatory-cassette design.</div>
+        <span class="svc-deliv-label">Main deliverables</span>
+        <div class="svc-chips"><span>Target-selection report</span><span>Pathway &amp; tissue-risk analysis</span><span>Promoter / cassette logic</span><span>CRISPR intervention strategy</span><span>Safety &amp; biomarker roadmap</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-idx">05</div>
+        <h3>Multi-Omics Biomarker Panel &amp; Companion-Diagnostic Design</h3>
+        <div class="svc-role">Supports diagnostic development, patient stratification, companion-diagnostic strategy, and clinical biomarker selection.</div>
+        <span class="svc-deliv-label">Main deliverables</span>
+        <div class="svc-chips"><span>Biomarker ranking</span><span>Regulatory-network justification</span><span>Subtype logic</span><span>Minimal panel concept</span><span>Assay-translation notes</span><span>Validation cohort plan</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-idx">06</div>
+        <h3>AI &amp; Knowledge-Graph Intelligence for Biomedical R&amp;D</h3>
+        <div class="svc-role">Supports pharma AI, digital twins, internal R&amp;D copilots, disease knowledge graphs, and explainable-AI systems.</div>
+        <span class="svc-deliv-label">Main deliverables</span>
+        <div class="svc-chips"><span>Disease-specific knowledge graph</span><span>Curated regulatory relations</span><span>TRANSFAC / TRANSPATH / HumanPSD mapping</span><span>AI-ready exports</span><span>Reasoning workflows</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW YOU ENGAGE — Pay on Success -->
+<section class="block ways" style="background:var(--gx-blue-050);border-top:var(--gx-border) solid var(--gx-grey-200);border-bottom:var(--gx-border) solid var(--gx-grey-200)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="draft-chip">Draft model · needs sign-off</span>
+      <span class="eyebrow">How you engage</span>
+      <h2>Start with strategy. Pay the rest when your targets validate.</h2>
+      <p class="lede">One path, scoped case by case — and you can stop at any step. This turns your spend from a fixed cost into an outcome-linked one.</p>
+      <span class="flag-note">The whole pay-on-success / validated-targets model below reflects the direction agreed on the call; pricing mechanics and scope still need Prof. Kel's sign-off.</span>
+    </div>
+    <div class="for-grid reveal">
+      <div class="for-card">
+        <span class="tag" style="margin:0 0 var(--gx-space-3)">Step 1 · low starting fee</span>
+        <h3>Intelligence Package</h3>
+        <p>We analyse your data across TRANSFAC, TRANSPATH and HumanPSD and hand you a ranked shortlist of the targets or master regulators driving your disease, with an expert report and clear validation recommendations. If nothing convincing comes out, this is where it stops — and it's the cheapest step.</p>
+      </div>
+      <div class="for-card">
+        <span class="tag" style="margin:0 0 var(--gx-space-3)">Step 2 · pay on success</span>
+        <h3>Validated targets</h3>
+        <p><span class="flag">We validate the top targets ourselves in a defined cell-line assay (e.g. siRNA or CRISPR knock-down). You pay the success fee for the targets that hold up.</span> We deliver targets — validated. We deliberately don't do compound screening: it's a crowded field and not where our edge is.</p>
+      </div>
+      <div class="for-card">
+        <span class="tag" style="margin:0 0 var(--gx-space-3)">Step 3 · full package</span>
+        <h3>Full translational development</h3>
+        <p>For teams that want to go further, we coordinate onward wet-lab work with partner CROs and academic labs, carrying the question from mechanism through to a validation-ready, development-ready package — as a joint offering for pharma, biotech, diagnostics companies and research consortia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (new) -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="draft-chip">Placeholder quotes — replace with real, approved ones</span>
+      <span class="eyebrow">In their words</span>
+      <h2>What teams say after the work.</h2>
+      <p class="lede">Two or three short quotes about the service (not the software or training) is enough — people no longer read long testimonial walls.</p>
+    </div>
+    <div class="tst-grid reveal">
+      <div class="tst">
+        <div class="ql"><span class="flag">"They didn't hand us another gene list — they told us which regulator was driving the phenotype, and it held up when we tested it."</span></div>
+        <div class="qa">— [DRAFT] Head of Translational Research, EU oncology consortium</div>
+      </div>
+      <div class="tst">
+        <div class="ql"><span class="flag">"We came in with a resistance problem we couldn't crack. The mechanistic read gave us the combination hypothesis we're now validating."</span></div>
+        <div class="qa">— [DRAFT] VP Discovery, biotech (name withheld pending approval)</div>
+      </div>
+      <div class="tst">
+        <div class="ql"><span class="flag">"The promoter design worked in the tissue we needed — not something a standard service could have done."</span></div>
+        <div class="qa">— [DRAFT] Gene-therapy programme lead</div>
+      </div>
+    </div>
+    <p style="font-size:var(--gx-text-sm);color:var(--gx-grey-600);margin-top:var(--gx-space-5)">More references available under NDA on request.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final" id="talk">
+  <div class="narrow">
+    <span class="eyebrow" style="display:block;margin-bottom:var(--gx-space-5)">Start with a conversation</span>
+    <h2>Tell us the question. We'll scope the <em>answer.</em></h2>
+    <p>Every engagement is built case by case — scope, deliverables, IP, data terms and timeline all agreed before work begins. The first step is a short discovery call to understand what you're trying to resolve.</p>
+    <a href="#" class="btn-primary">Book a discovery call <span class="arr">→</span></a>
+    <div class="cta-note">No fixed package · scoped to your question · pay on success · expert-delivered · your IP</div>
+    <div style="margin-top:var(--gx-space-4)"><span class="flag-note">Booking link is a placeholder — needs the real URL</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="foot-logo" aria-label="geneXplain">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3267.83 1024"><polygon points="1497.842 588.762 1543.121 639.941 1429.923 767.887 1339.365 767.887 1497.842 588.762" fill="#fff"/><polygon points="1497.842 435.227 1543.121 384.049 1429.923 256.103 1339.365 256.103 1497.842 435.227" fill="#fff"/><polygon points="1534.069 511.995 1760.464 256.103 1851.149 256.308 1624.627 511.995 1851.149 767.887 1760.464 767.887 1534.069 511.995" fill="#fff"/><path d="M453.287,509.01h45.908v104.079c-27.247,22.013-65.318,33.202-102.27,33.202-80.999,0-140.719-56.329-140.719-134.294s59.721-134.3,141.461-134.3c43.676,0,80.25,14.548,104.887,42.53l-30.606,29.844c-20.53-20.516-44.047-29.844-72.042-29.844-55.613,0-94.804,37.674-94.804,91.77,0,52.97,39.191,91.77,94.433,91.77,18.661,0,36.952-3.736,53.752-13.435v-81.323Z" fill="#fff"/><path d="M768.306,601.9v40.662h-195.962v-261.135h190.735v40.662h-142.21v67.895h126.159v39.92h-126.159v71.996h147.437Z" fill="#fff"/><path d="M1063.908,381.428v261.135h-39.94l-144.071-176.823v176.823h-48.154v-261.135h39.94l144.078,176.823v-176.823h48.147Z" fill="#fff"/><path d="M1339.365,601.9v40.662h-195.962v-261.135h190.735v40.662h-142.21v67.895h126.159v39.92h-126.159v71.996h147.437Z" fill="#fff"/><path d="M2069.88,474.318c0,57.448-42.55,92.89-111.233,92.89h-58.972v75.355h-48.525v-261.135h107.497c68.684,0,111.233,35.071,111.233,92.89ZM2020.984,474.318c0-32.825-22.027-51.851-64.576-51.851h-56.733v103.701h56.733c42.55,0,64.576-19.019,64.576-51.851Z" fill="#fff"/><path d="M2127.732,381.428h48.525v220.102h136.612v41.033h-185.137v-261.135Z" fill="#fff"/><path d="M2531.951,582.126h-130.637l-25.756,60.436h-50.016l117.58-261.135h47.777l117.944,261.135h-50.764l-26.127-60.436ZM2515.906,544.081l-49.274-114.155-48.896,114.155h98.17Z" fill="#fff"/><path d="M2651.386,381.428h48.525v261.135h-48.525v-261.135Z" fill="#fff"/><path d="M3011.935,381.428v261.135h-39.94l-144.071-176.823v176.823h-48.154v-261.135h39.94l144.078,176.823v-176.823h48.147Z" fill="#fff"/></svg>
+    </span>
+    <div>TRANSFAC · TRANSPATH · HumanPSD — curated since 1988</div>
+    <div><a href="#talk">Book a discovery call →</a></div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
